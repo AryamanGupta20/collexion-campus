@@ -1,0 +1,7 @@
+.campus-data/
+node_modules/
+.env
+.env.*
+!.env.example
+*.sqlite*
+.DS_Store

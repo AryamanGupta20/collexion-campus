@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import {DatabaseSync} from 'node:sqlite';
+import {readFileSync} from 'node:fs';
+import {adapter} from '../server/local.mjs';
+import {fileBucket} from '../worker/d1-files.mjs';
+import worker from '../worker/index.mjs';
+const sql=new DatabaseSync(':memory:');sql.exec(readFileSync(new URL('../migrations/0001_initial.sql',import.meta.url),'utf8'));
+const DB=adapter(sql),bucket=fileBucket(DB);
+const bytes=crypto.getRandomValues(new Uint8Array(30000));await bucket.put('private/test',bytes.buffer);assert.deepEqual(new Uint8Array((await bucket.get('private/test')).body),bytes);
+await assert.rejects(bucket.put('too-large',new ArrayBuffer(1024*1024+1)));assert.equal(await bucket.get('too-large'),null);
+await bucket.delete('private/test');assert.equal(await bucket.get('private/test'),null);
+const env={DB,ASSETS:{fetch:()=>new Response('page')}};
+assert.equal(await (await worker.fetch(new Request('https://campus.test/'),env)).text(),'page');
+assert.equal((await worker.fetch(new Request('https://campus.test/api/me'),env)).status,200);
+assert.equal((await worker.fetch(new Request('https://campus.test/api/admin/students'),env)).status,401);
+const r=await worker.fetch(new Request('https://campus.test/api/auth/signup',{method:'POST',headers:{Origin:'https://campus.test','Content-Type':'application/json','X-Campus-Request':'1','oai-authenticated-user-email':'aryamangupta55@gmail.com'},body:JSON.stringify({name:'Owner',email:'aryamangupta55@gmail.com',password:'long-test-password'})}),env);
+assert.equal(r.status,403,'Cloudflare must never trust Sites identity headers');
+console.log('PASS: free-host migration, private file round trip/limit/delete, asset/API routing, reserved admin protection. Worker runtime and live deployment not tested.');
