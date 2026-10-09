@@ -14,6 +14,18 @@ const select=(label,id,values,selected='')=>`<div class="c-field"><label for="ho
 const hero=(k,t,d,n)=>`<div class="c-hero"><div><div class="c-eyebrow">${k}</div><h2>${t}</h2><p>${d}</p></div><aside class="c-note">${n}</aside></div>`;
 const sources={ignou:{name:'IGNOU · BCA programme',url:'https://www.ignou.ac.in/schools/programme/BCA_NEW'},christ:{name:'CHRIST · BCA programme',url:'https://bkc.christuniversity.in/courses/Nzc3'},du:{name:'University of Delhi · Computer Science',url:'https://academicaffairs.du.ac.in/syllabi/department-of-computer-science/'},vtu:{name:'VTU · Engineering schemes and syllabuses',url:'https://vtu.ac.in/en/b-e-scheme-syllabus/'},msu:{name:'Manonmaniam Sundaranar University · CS & IT, 2024–25',url:'https://www.msuniv.ac.in/images/academic/centre%20academic%20affairs/revised%20syllabus/2024-25-Batch/UG_Part-III-Major-C-Science/BScCS_IT.pdf'},bba:{name:'IGNOU · BBA programme',url:'https://www.ignou.ac.in/schools/programme/BBA'},com:{name:'University of Delhi · B.Com programme',url:'https://academicaffairs.du.ac.in/syllabi/b-com-p/'},econ:{name:'University of Delhi · Economics',url:'https://academicaffairs.du.ac.in/syllabi/department-of-economics/'},math:{name:'University of Delhi · Mathematics',url:'https://academicaffairs.du.ac.in/syllabi/department-of-mathematics/'},stats:{name:'University of Delhi · Statistics',url:'https://academicaffairs.du.ac.in/syllabi/department-of-statistics/'}};
 const resources={
+c:["C programming", "CodeWithHarry", "Hindi", "PLu0W_9lII9aiXlHcLx-mDH1Qul38wD3aR"],
+cpp:["Object-oriented programming with C++", "CodeWithHarry", "Hindi", "PLu0W_9lII9agpFUAlPFe_VNSlXW5uE0YL"],
+java:["Java programming", "CodeWithHarry", "Hindi", "PLu0W_9lII9agS67Uits0UnJyrYiXhDS6q"],
+web:["Web development: HTML, CSS and more", "CodeWithHarry", "Hindi", "PLu0W_9lII9agq5TrH9XLIKQvv0iaF2X3w"],
+javascript:["JavaScript programming", "CodeWithHarry", "Hindi", "PLu0W_9lII9ahR1blWXxgSlL4y9iQBnLpR"],
+php:["PHP and web applications", "CodeWithHarry", "Hindi", "PLu0W_9lII9aikXkRE0WxDt1vozo3hnmtR"],
+discrete:["Discrete mathematics", "Gate Smashers", "Hindi", "PLxCzCOWd7aiH2wwES9vPWsEL6ipTaUSl3"],
+algo_hi:["Design and analysis of algorithms", "Gate Smashers", "Hindi", "PLxCzCOWd7aiHcmS4i14bI0VrMbZTUvlTa"],
+ai_found:["Artificial intelligence foundations", "Gate Smashers", "Hindi", "PLxCzCOWd7aiHGhOHV-nwb0HR5US5GFKFI"],
+cloud:["Cloud computing", "Gate Smashers", "Hindi", "PLxCzCOWd7aiHRHVUtR-O52MsrdUSrzuy4"],
+toc:["Theory of computation", "Gate Smashers", "Hindi", "PLxCzCOWd7aiFM9Lj5G9G_76adtyb4ef7i"],
+
 python:['Programming with Python','CodeWithHarry','Hindi','PLu0W_9lII9agwh1XjRt242xIpHhPT2llg'],
 ds:['Data structures','Gate Smashers','Hindi','PLxCzCOWd7aiEwaANNt3OqJPVIxwp2ebiT'],
 db:['Database management','Gate Smashers','Hindi','PLxCzCOWd7aiFAN6I8CuViBuCdJgiOkT2Y'],
@@ -33,27 +45,561 @@ econ:['Economics foundations','CrashCourse','English','PL8dPuuaLjXtPNZwz5_o_5uir
 enterprise:['Entrepreneurship foundations','CrashCourse','English','PL8dPuuaLjXtNamNKW5qlS-nKgA0on7Qze']
 };
 const courses=[
-['bca','BCA','Computer Applications','Computing','cs',['ignou','christ'],['python','ds','db','os','se'],'Build and explain a small application with a database.'],
-['bsc-cs','B.Sc Computer Science','Computer Science','Computing','cs',['du','msu'],['python','coa','linear','ds','db','os','algo'],'Create a software project and explain the computing ideas behind it.'],
-['bsc-it','B.Sc IT','Information Technology','Computing','cs',['msu'],['python','db','cn','os','ds'],'Build an IT support or information-management project.'],
-['cse','B.E. / B.Tech CSE','Computer Science & Engineering','Engineering','cs',['vtu','du'],['python','ds','coa','os','db','cn','algo'],'Build a complete application, test it, and explain your design choices.'],
-['ise','B.E. Information Science','Information Science & Engineering','Engineering','cs',['vtu'],['python','ds','db','cn','se'],'Build an information system with a clear data model.'],
-['ai','B.E. / B.Tech AI & ML','Artificial Intelligence & Machine Learning','Engineering','ai',['vtu'],['python','linear','stats','ds','ml'],'Build a small model and report its limitations and evaluation results.'],
-['aids','B.E. / B.Tech AI & DS','Artificial Intelligence & Data Science','Engineering','ai',['vtu'],['python','linear','stats','db','ml'],'Clean a dataset, build a baseline, and explain your findings.'],
-['data','B.E. / B.Tech CSE (DS)','Computer Science · Data Science','Engineering','ai',['vtu'],['python','stats','db','regression','ml'],'Turn a dataset into a clear report with reproducible analysis.'],
-['cyber','B.E. / B.Tech CSE (Cyber)','Computer Science · Cyber Security','Engineering','security',['vtu'],['python','os','cn','db'],'Document security checks in a lab you own or have permission to use.'],
-['iot','B.E. / B.Tech CSE (IoT)','Computer Science · Internet of Things','Engineering','hardware',['vtu'],['python','digital','cn','db'],'Build a sensor-to-dashboard prototype or a simulation.'],
-['csbs','B.E. / B.Tech CS & Business','Computer Science & Business Systems','Engineering','cs',['vtu'],['python','ds','db','stats','econ'],'Build a business-facing software project with a simple cost case.'],
-['csd','B.E. / B.Tech CS & Design','Computer Science & Design','Engineering','cs',['vtu'],['python','ds','db','se'],'Design and test an interface, then build its main flow.'],
-['ce','B.E. Computer Engineering','Computer Engineering','Engineering','hardware',['vtu'],['python','coa','digital','os','cn'],'Build a small system and explain how software meets hardware.'],
-['ece','B.E. / B.Tech ECE','Electronics & Communication','Engineering','hardware',['vtu'],['calculus','linear','digital','python'],'Prepare a tested electronics or communication-system project.'],
-['ee','B.E. / B.Tech EEE','Electrical & Electronics','Engineering','hardware',['vtu'],['calculus','linear','digital'],'Prepare a circuit or control-system simulation with clear results.'],
-['bba','BBA','Business Administration','Business','business',['bba'],['accounting','stats','econ','enterprise'],'Make a market study and a practical business proposal.'],
-['bcom','B.Com','Commerce','Business','business',['com','bba'],['accounting','stats','econ','enterprise'],'Build a spreadsheet report and explain the business numbers.'],
-['economics','B.A. Economics','Economics','Science & Arts','quant',['econ'],['econ','calculus','stats','regression'],'Write a short economic-data report with sources and charts.'],
-['maths','B.Sc Mathematics','Mathematics','Science & Arts','quant',['math'],['calculus','linear','stats'],'Build a mathematical model and explain its assumptions.'],
-['statistics','B.Sc Statistics','Statistics','Science & Arts','quant',['stats'],['stats','linear','regression','python'],'Analyse a dataset, explain uncertainty, and present your result.']
-].filter(c=>['Computing','Engineering'].includes(c[3])).map(([id,title,name,group,family,refs,subjects,project])=>({id,title,name,group,family,refs,subjects,project}));
+  [
+    "bca",
+    "BCA",
+    "Computer Applications",
+    "Computing",
+    "cs",
+    [
+      "ignou",
+      "christ"
+    ],
+    [
+      "c",
+      "python",
+      "cpp",
+      "java",
+      "ds",
+      "db",
+      "os",
+      "coa",
+      "cn",
+      "se",
+      "web",
+      "javascript",
+      "php",
+      "discrete",
+      "algo_hi",
+      "digital",
+      "linear",
+      "stats",
+      "ai_found",
+      "cloud"
+    ],
+    "Build and explain a small application with a database."
+  ],
+  [
+    "bsc-cs",
+    "B.Sc Computer Science",
+    "Computer Science",
+    "Computing",
+    "cs",
+    [
+      "du",
+      "msu"
+    ],
+    [
+      "c",
+      "python",
+      "cpp",
+      "java",
+      "discrete",
+      "linear",
+      "ds",
+      "db",
+      "coa",
+      "os",
+      "cn",
+      "algo_hi",
+      "toc",
+      "se",
+      "web"
+    ],
+    "Create a software project and explain the computing ideas behind it."
+  ],
+  [
+    "bsc-it",
+    "B.Sc IT",
+    "Information Technology",
+    "Computing",
+    "cs",
+    [
+      "msu"
+    ],
+    [
+      "c",
+      "python",
+      "java",
+      "ds",
+      "db",
+      "os",
+      "cn",
+      "web",
+      "javascript",
+      "php",
+      "se",
+      "cloud"
+    ],
+    "Build an IT support or information-management project."
+  ],
+  [
+    "cse",
+    "B.E. / B.Tech CSE",
+    "Computer Science & Engineering",
+    "Engineering",
+    "cs",
+    [
+      "vtu",
+      "du"
+    ],
+    [
+      "c",
+      "cpp",
+      "python",
+      "java",
+      "discrete",
+      "ds",
+      "coa",
+      "digital",
+      "os",
+      "db",
+      "cn",
+      "algo_hi",
+      "toc",
+      "se",
+      "web",
+      "cloud"
+    ],
+    "Build a complete application, test it, and explain your design choices."
+  ],
+  [
+    "ise",
+    "B.E. Information Science",
+    "Information Science & Engineering",
+    "Engineering",
+    "cs",
+    [
+      "vtu"
+    ],
+    [
+      "c",
+      "python",
+      "java",
+      "ds",
+      "db",
+      "cn",
+      "os",
+      "discrete",
+      "algo_hi",
+      "se",
+      "web",
+      "cloud"
+    ],
+    "Build an information system with a clear data model."
+  ],
+  [
+    "ai",
+    "B.E. / B.Tech AI & ML",
+    "Artificial Intelligence & Machine Learning",
+    "Engineering",
+    "ai",
+    [
+      "vtu"
+    ],
+    [
+      "python",
+      "linear",
+      "stats",
+      "ds",
+      "db",
+      "algo_hi",
+      "ai_found",
+      "ml",
+      "regression"
+    ],
+    "Build a small model and report its limitations and evaluation results."
+  ],
+  [
+    "aids",
+    "B.E. / B.Tech AI & DS",
+    "Artificial Intelligence & Data Science",
+    "Engineering",
+    "ai",
+    [
+      "vtu"
+    ],
+    [
+      "python",
+      "linear",
+      "stats",
+      "ds",
+      "db",
+      "algo_hi",
+      "ai_found",
+      "regression",
+      "ml"
+    ],
+    "Clean a dataset, build a baseline, and explain your findings."
+  ],
+  [
+    "data",
+    "B.E. / B.Tech CSE (DS)",
+    "Computer Science \u00b7 Data Science",
+    "Engineering",
+    "ai",
+    [
+      "vtu"
+    ],
+    [
+      "python",
+      "stats",
+      "linear",
+      "db",
+      "ds",
+      "algo_hi",
+      "regression",
+      "ai_found",
+      "ml"
+    ],
+    "Turn a dataset into a clear report with reproducible analysis."
+  ],
+  [
+    "cyber",
+    "B.E. / B.Tech CSE (Cyber)",
+    "Computer Science \u00b7 Cyber Security",
+    "Engineering",
+    "security",
+    [
+      "vtu"
+    ],
+    [
+      "c",
+      "python",
+      "ds",
+      "os",
+      "cn",
+      "db",
+      "discrete",
+      "web",
+      "cloud"
+    ],
+    "Document security checks in a lab you own or have permission to use."
+  ],
+  [
+    "iot",
+    "B.E. / B.Tech CSE (IoT)",
+    "Computer Science \u00b7 Internet of Things",
+    "Engineering",
+    "hardware",
+    [
+      "vtu"
+    ],
+    [
+      "c",
+      "cpp",
+      "python",
+      "digital",
+      "coa",
+      "cn",
+      "os",
+      "db",
+      "cloud"
+    ],
+    "Build a sensor-to-dashboard prototype or a simulation."
+  ],
+  [
+    "csbs",
+    "B.E. / B.Tech CS & Business",
+    "Computer Science & Business Systems",
+    "Engineering",
+    "cs",
+    [
+      "vtu"
+    ],
+    [
+      "python",
+      "java",
+      "ds",
+      "db",
+      "cn",
+      "se",
+      "web",
+      "stats",
+      "econ"
+    ],
+    "Build a business-facing software project with a simple cost case."
+  ],
+  [
+    "csd",
+    "B.E. / B.Tech CS & Design",
+    "Computer Science & Design",
+    "Engineering",
+    "cs",
+    [
+      "vtu"
+    ],
+    [
+      "c",
+      "python",
+      "java",
+      "ds",
+      "db",
+      "se",
+      "web",
+      "javascript"
+    ],
+    "Design and test an interface, then build its main flow."
+  ],
+  [
+    "ce",
+    "B.E. Computer Engineering",
+    "Computer Engineering",
+    "Engineering",
+    "hardware",
+    [
+      "vtu"
+    ],
+    [
+      "c",
+      "cpp",
+      "python",
+      "ds",
+      "coa",
+      "digital",
+      "os",
+      "cn",
+      "algo_hi"
+    ],
+    "Build a small system and explain how software meets hardware."
+  ],
+  [
+    "ece",
+    "B.E. / B.Tech ECE",
+    "Electronics & Communication",
+    "Engineering",
+    "hardware",
+    [
+      "vtu"
+    ],
+    [
+      "calculus",
+      "linear",
+      "digital",
+      "python"
+    ],
+    "Prepare a tested electronics or communication-system project."
+  ],
+  [
+    "ee",
+    "B.E. / B.Tech EEE",
+    "Electrical & Electronics",
+    "Engineering",
+    "hardware",
+    [
+      "vtu"
+    ],
+    [
+      "calculus",
+      "linear",
+      "digital"
+    ],
+    "Prepare a circuit or control-system simulation with clear results."
+  ],
+  [
+    "mca",
+    "MCA",
+    "Master of Computer Applications",
+    "Postgraduate",
+    "cs",
+    [],
+    [
+      "java",
+      "python",
+      "ds",
+      "db",
+      "os",
+      "cn",
+      "algo_hi",
+      "toc",
+      "se",
+      "web",
+      "cloud"
+    ],
+    "Build a deployed application with tests and a clear design report."
+  ],
+  [
+    "msc-cs",
+    "M.Sc Computer Science",
+    "Master of Science in Computer Science",
+    "Postgraduate",
+    "cs",
+    [],
+    [
+      "python",
+      "java",
+      "discrete",
+      "ds",
+      "db",
+      "os",
+      "cn",
+      "algo_hi",
+      "toc",
+      "ai_found"
+    ],
+    "Compare two computing approaches and document a working research prototype."
+  ],
+  [
+    "msc-it",
+    "M.Sc IT",
+    "Master of Science in Information Technology",
+    "Postgraduate",
+    "cs",
+    [],
+    [
+      "python",
+      "java",
+      "db",
+      "os",
+      "cn",
+      "se",
+      "web",
+      "javascript",
+      "cloud"
+    ],
+    "Build a secure information system and document deployment and testing."
+  ],
+  [
+    "msc-ds",
+    "M.Sc Data Science",
+    "Master of Science in Data Science",
+    "Postgraduate",
+    "ai",
+    [],
+    [
+      "python",
+      "linear",
+      "stats",
+      "db",
+      "ds",
+      "algo_hi",
+      "regression",
+      "ai_found",
+      "ml"
+    ],
+    "Compare models on a documented dataset and explain errors and data limits."
+  ],
+  [
+    "msc-ai",
+    "M.Sc Artificial Intelligence",
+    "Master of Science in Artificial Intelligence",
+    "Postgraduate",
+    "ai",
+    [],
+    [
+      "python",
+      "linear",
+      "stats",
+      "ds",
+      "algo_hi",
+      "ai_found",
+      "regression",
+      "ml"
+    ],
+    "Evaluate an AI prototype against a simple baseline and report its limitations."
+  ],
+  [
+    "btech-it",
+    "B.E. / B.Tech IT",
+    "Information Technology",
+    "Engineering",
+    "cs",
+    [],
+    [
+      "c",
+      "cpp",
+      "python",
+      "java",
+      "ds",
+      "db",
+      "os",
+      "cn",
+      "se",
+      "algo_hi",
+      "web",
+      "cloud"
+    ],
+    "Build and deploy a tested campus information system."
+  ],
+  [
+    "bsc-ds",
+    "B.Sc Data Science",
+    "Data Science",
+    "Computing",
+    "ai",
+    [],
+    [
+      "python",
+      "linear",
+      "stats",
+      "db",
+      "ds",
+      "regression",
+      "ai_found",
+      "ml"
+    ],
+    "Clean a public dataset and present an analysis with reproducible code."
+  ],
+  [
+    "bsc-ai",
+    "B.Sc Artificial Intelligence",
+    "Artificial Intelligence",
+    "Computing",
+    "ai",
+    [],
+    [
+      "python",
+      "linear",
+      "stats",
+      "ds",
+      "db",
+      "algo_hi",
+      "ai_found",
+      "ml"
+    ],
+    "Build a small classifier and show where it makes mistakes."
+  ],
+  [
+    "bsc-cyber",
+    "B.Sc Cyber Security",
+    "Computer Science and Cyber Security",
+    "Computing",
+    "security",
+    [],
+    [
+      "c",
+      "python",
+      "ds",
+      "db",
+      "os",
+      "cn",
+      "discrete",
+      "web",
+      "cloud"
+    ],
+    "Write a security report from a practice lab you own or may use."
+  ],
+  [
+    "pgdca",
+    "PGDCA",
+    "Postgraduate Diploma in Computer Applications",
+    "Diploma",
+    "cs",
+    [],
+    [
+      "c",
+      "python",
+      "java",
+      "ds",
+      "db",
+      "os",
+      "cn",
+      "web",
+      "se"
+    ],
+    "Build a small database application and explain how it works."
+  ]
+].map(([id,title,name,group,family,refs,subjects,project])=>({id,title,name,group,family,refs,subjects,project}));
 const socialVideos=[
 {title:'How to speak so that people want to listen',creator:'Julian Treasure · TED',lang:'English',id:'eIho2S0ZahI',tag:'Speaking with confidence',keys:'speak speaking speech public presentation stage nervous confidence communicate communication class',why:'A talk about voice, clarity, and how you come across when speaking.'},
 {title:'Extraordinary Communication Skills',creator:'Sandeep Maheshwari',lang:'Hindi',id:'VczVqHJW0gg',tag:'Speaking with confidence',keys:'confidence shy shyness communication communicate speak speaking hindi nervous dar baat bolna',why:'A Hindi session about expressing yourself and communicating with others.'},
@@ -114,18 +660,18 @@ on('dashboard-profile','submit',e=>{e.preventDefault();const name=get('account-n
 on('dashboard-motion','change',e=>{dashboardMotion=e.target.checked;root.setAttribute('data-motion',dashboardMotion?'on':'off');});
 }
 
-function courseList(){return hero('College Courses','Your course comes first.','Choose a degree. Start with its roadmap, then find subject-wise playlists.','<strong>Tech course paths</strong><p>Computing and engineering degrees.</p>')+`<div class="c-search"><div><label for="hologram-course-query">Search your degree</label><input id="hologram-course-query" placeholder="Try BCA, B.Tech, AI, cybersecurity…" value="${esc(state.query)}"></div><div><label for="hologram-course-group">Browse by field</label><select id="hologram-course-group">${['All courses','Computing','Engineering'].map(g=>`<option ${state.group===g?'selected':''}>${g}</option>`).join('')}</select></div></div><div id="hologram-course-results"></div><p class="c-small">General guides, not one universal Indian syllabus. Use your own college syllabus to check the subjects for your batch.</p>`;}
+function courseList(){return hero('College Courses','Your course comes first.','Choose a degree. Start with its roadmap, then find subject-wise playlists.','<strong>Tech course paths</strong><p>Undergraduate, postgraduate and diploma paths.</p>')+`<div class="c-search"><div><label for="hologram-course-query">Search your degree</label><input id="hologram-course-query" placeholder="Try BCA, B.Tech, AI, cybersecurity…" value="${esc(state.query)}"></div><div><label for="hologram-course-group">Browse by field</label><select id="hologram-course-group">${['All courses','Computing','Engineering','Postgraduate','Diploma'].map(g=>`<option ${state.group===g?'selected':''}>${g}</option>`).join('')}</select></div></div><div id="hologram-course-results"></div><p class="c-small">General guides, not one universal Indian syllabus. Use your own college syllabus to check the subjects for your batch.</p>`;}
 function paintCourses(){const q=state.query.toLowerCase().replace(/maths/g,'math');const found=courses.filter(c=>(state.group==='All courses'||c.group===state.group)&&[c.title,c.name,c.group].join(' ').toLowerCase().includes(q));get('course-results').innerHTML=`<p class="c-small" aria-live="polite">${found.length} course${found.length===1?'':'s'} found</p><div class="c-grid">${found.map(c=>`<button type="button" class="c-card cursor-interaction" data-action="course" data-value="${c.id}"><span class="c-pill c-lilac">${c.group}</span><h3>${c.title}</h3><p>${c.name}</p><span class="c-go">Open roadmap ${icon('arrow-right')}</span></button>`).join('')}</div>${found.length?'':'<div class="c-empty">No course matches yet. Try a broader name or another field.</div>'}`;icons();}
 function stages(c){if(c.liveRoadmap)return c.liveRoadmap.map((x,i)=>[esc(x),"Follow this stage at your own pace."]);let foundation,core,tools;switch(c.family){case 'business':foundation='Start with business terms, basic calculations, and clear writing.';core='Work through accounting, economics, management, and statistics in your own syllabus.';tools='Use spreadsheets for costs, reports, and simple analysis. Practise explaining a business case.';break;case 'quant':foundation='Refresh algebra, functions, graphs, and mathematical notation.';core='Work through the mathematical or economic core of your degree, with regular problem-solving.';tools='Learn spreadsheets and a data tool such as Python or R. Explain assumptions and interpret results.';break;case 'hardware':foundation='Refresh mathematics and physics. Learn basic programming alongside your lab work.';core='Follow your branch’s circuits, systems, hardware, and related computing subjects.';tools='Learn a relevant simulation tool, document measurements, and practise reading technical diagrams.';break;case 'ai':foundation='Build a programming base, then refresh linear algebra and probability.';core='Study data structures, databases, statistics, and your AI or data-science subjects.';tools='Work with datasets, simple baselines, model evaluation, and clear reports.';break;case 'security':foundation='Learn basic programming, computer systems, and how networks communicate.';core='Study operating systems, networks, databases, and your security subjects.';tools='Use legal practice labs, keep clear notes, and learn to explain both a problem and its fix.';break;default:foundation='Learn computer basics and one programming language. Start with small programs.';core='Work through data structures, databases, operating systems, and networks as your syllabus introduces them.';tools='Use Git, debugging, testing, and a development stack that suits your project.';}
 return [['Build your base',foundation],['Learn your core subjects',core],['Build useful skills',tools],['Create proof of your work',c.project],['Explore internships','Prepare a short résumé, show your work, check eligibility, and keep a list of applications and follow-ups.'],['Prepare for placements',c.family==='business'?'Practise role-specific cases, spreadsheet tasks, aptitude where required, and explaining your projects.':c.family==='quant'?'Practise analytical questions, explain your methods, and prepare for the role you choose. Further study is another option.':'Revise relevant core subjects, practise role-specific technical questions, and explain your project clearly. Add coding or aptitude preparation when the employer requires it.']];}
 function courseDetail(){const c=courses.find(c=>c.id===state.course);if(!c){state.course=null;return courseList();}let html=btn('← All courses','all-courses')+hero(c.group+' / General course guide',c.title,esc(c.name),' <strong>From starting point<br>to placement preparation.</strong><p>Move at your own pace. Your college’s official syllabus stays the reference.</p>');html+=`<div class="c-tabs" aria-label="Course guide">${[['roadmap','1. Roadmap'],['syllabus','2. Syllabus & playlists'],['roles','3. Explore Tech Roles'],['portfolio','4. My Work Portfolio']].map(([v,t])=>`<button type="button" class="c-btn cursor-interaction" aria-pressed="${state.courseTab===v}" data-action="course-tab" data-value="${v}">${t}</button>`).join('')}</div>`;
 if(state.courseTab==='roadmap'){const steps=stages(c),done=progress[c.id]||[];html+=`<div class="c-cols"><section class="c-card"><div class="c-row"><h3>Your roadmap</h3><span id="hologram-roadmap-count" class="c-small">${done.length} of ${stages(c).length} marked complete</span></div><div class="c-progress" role="progressbar" aria-label="Roadmap progress" aria-valuemin="0" aria-valuemax="6" aria-valuenow="${done.length}"><div id="hologram-roadmap-fill" style="width:${done.length/stages(c).length*100}%"></div></div>${steps.map(([t,d],i)=>`<div class="c-step"><span class="c-step-number">${i+1}</span><div><h4>${t}</h4><p>${d}</p><label class="c-check"><input type="checkbox" data-progress="${i}" ${done.includes(i)?'checked':''}>Mark this stage complete</label></div></div>`).join('')}</section><aside><div class="c-card c-lilac"><span class="c-icon">${icon('route')}</span><h3>Know what comes next.</h3><p>This is a suggested learning and career-preparation path. It is not an admission rule, semester schedule, or placement guarantee.</p>${btn('Open syllabus & playlists →','course-tab','syllabus',true)}</div><div class="c-card c-mint c-tools"><h3>A project to work towards</h3><p>${c.project}</p></div></aside></div>`;}
-if(state.courseTab==='syllabus'){const r=c.subjects.map(k=>resources[k]);html+=`<div class="c-banner"><strong>Selected core-subject guide.</strong> These playlists support learning; they do not cover every paper or elective. Check the official syllabus for your batch.</div><div class="c-row"><h3>Subjects → complete playlists</h3>${select('Playlist language','playlist-lang',['All','Hindi','English'],state.lang)}</div><div id="hologram-playlist-results">${playlistRows(c)}</div>`;}
+if(state.courseTab==='syllabus'){const r=c.subjects.map(k=>resources[k]);html+=`<div class="c-banner"><strong>General subject guide.</strong> Mostly Hindi playlists, with clearly labelled English options. These support learning; they do not cover every paper or elective. Check the official syllabus for your batch.</div><div class="c-row"><h3>Subjects → complete playlists</h3>${select('Playlist language','playlist-lang',['All','Hindi','English'],state.lang)}</div><div id="hologram-playlist-results">${playlistRows(c)}</div>`;}
 if(state.courseTab==='roles')html+=roleView();
 if(state.courseTab==='portfolio')html+=portfolioView(c);
 return html;}
 function sourceLinks(c){return c.refs.map(k=>link(sources[k].url,esc(sources[k].name)+' ↗','c-source')).join('');}
-function playlistRows(c){if(c.livePlaylist){const extra=`<article class="c-subject"><h4>${esc(c.livePlaylist.subject)}</h4>${link(c.livePlaylist.url,"Open full playlist ↗","c-btn")}</article>`;return extra+playlistRows({...c,livePlaylist:null,subjects:c.subjects.filter(k=>resources[k][0]!==c.livePlaylist.subject)});}const rows=c.subjects.map(k=>resources[k]).filter(r=>state.lang==='All'||r[2]===state.lang);return rows.length?rows.map(r=>`<article class="c-subject"><div class="c-row"><div><h4>${r[0]}</h4><span class="c-small">${r[1]} · ${r[2]} · Full playlist</span></div>${link(yt(r[3]),icon('play')+' Open playlist','c-btn')}</div></article>`).join(''):'<div class="c-empty">No selected playlist in this language for this course yet. Choose “All” to see the available resources.</div>';}
+function playlistRows(c){if(c.livePlaylist){const extra=`<article class="c-subject"><h4>${esc(c.livePlaylist.subject)}</h4>${link(c.livePlaylist.url,"Open full playlist ↗","c-btn")}</article>`;return extra+playlistRows({...c,livePlaylist:null,subjects:c.subjects.filter(k=>resources[k][0]!==c.livePlaylist.subject)});}const rows=c.subjects.map(k=>resources[k]).filter(r=>state.lang==='All'||r[2]===state.lang);return rows.length?rows.map(r=>`<article class="c-subject"><div class="c-row"><div><h4>${r[0]}</h4>${c.id==='bca'&&[resources.ai_found,resources.cloud].includes(r)?'<span class="c-pill c-mint">Extra learning · optional</span>':''}<span class="c-small">${r[1]} · ${r[2]} · Full playlist</span></div>${link(yt(r[3]),icon('play')+' Open playlist','c-btn')}</div></article>`).join(''):'<div class="c-empty">No selected playlist in this language for this course yet. Choose “All” to see the available resources.</div>';}
 function social(){return hero('Social & Confidence','Something on your mind?','Common student situations. Clear video choices. No public scores.','<strong>Find an explanation<br>that speaks to you.</strong><p>Search a problem or choose one of the four starting points.</p>')+`<div class="c-two">${[['Speaking with confidence','“I get nervous speaking in class.”','lilac'],['Starting conversations','“I don’t know how to start talking.”','peach'],['Speaking English','“I want to express myself in English.”','blue'],['Procrastination','“I keep leaving things until later.”','mint']].map(([t,d,color])=>`<button type="button" class="c-card c-${color} cursor-interaction" data-action="social-topic" data-value="${t}"><h3>${d}</h3><span class="c-small">${t} →</span></button>`).join('')}</div><form id="hologram-social-form"><div class="c-search"><div><label for="hologram-social-query">Something else? Search your problem</label><input id="hologram-social-query" placeholder="Try making friends, communication, English…" value="${esc(state.socialQuery)}" maxlength="200"></div><div><label for="hologram-social-lang">Video language</label><select id="hologram-social-lang">${['All','Hindi','English'].map(l=>`<option ${state.socialLang===l?'selected':''}>${l}</option>`).join('')}</select></div></div><button class="c-btn c-primary cursor-interaction" type="submit">${icon('search')} Find videos</button></form><div id="hologram-social-results" class="c-tools" aria-live="polite"></div>`;}
 function socialResults(){const q=state.socialQuery.trim().toLowerCase();const stop=new Set(['i','am','is','the','a','to','my','how','do','can','in','of','with','and','want','not','dont','don','t','me','it','get']);const tokens=q.replace(/[^a-z0-9\s]/g,' ').split(/\s+/).filter(x=>x.length>1&&!stop.has(x));const scored=socialVideos.map(v=>({v,score:tokens.reduce((n,t)=>n+Number((v.keys+' '+v.tag+' '+v.title).toLowerCase().includes(t)),0)}));const rows=scored.filter(({v,score})=>(state.socialLang==='All'||v.lang===state.socialLang)&&(!q||score>0)).sort((a,b)=>b.score-a.score).map(x=>x.v);get('social-results').innerHTML=`<div class="c-row"><h3>${q?'Videos for your search':'Selected videos'}</h3><span class="c-small">${rows.length} match${rows.length===1?'':'es'} in our collection</span></div><div class="c-grid">${rows.map(v=>`<article class="c-card"><div class="c-video-art">${icon('play')} ${v.lang} · YouTube</div><h4>${esc(v.title)}</h4><p>${esc(v.why)}</p><p class="c-small">${esc(v.creator)}</p>${link('https://www.youtube.com/watch?v='+v.id,'Watch on YouTube ↗','c-btn')}</article>`).join('')}</div>${rows.length?'':'<div class="c-empty">No selected video matches this search and language yet.</div>'}${q?`<div class="c-banner">Want more options? ${link('https://www.youtube.com/results?search_query='+encodeURIComponent(state.socialQuery+' '+(state.socialLang==='All'?'':state.socialLang)),'Search this problem on YouTube ↗')}<p class="c-small">Opens a live YouTube search. Those results are not reviewed by Collexion Campus.</p></div>`:''}<p class="c-small">Videos offer general perspectives and skills. They are not personal counselling or a promise to solve every problem.</p>`;icons();}
 function business(){let html=hero('Entrepreneurship','Make your idea<br>more than a thought.','Shape your idea, check your costs, and find potential teammates.','<strong>Leave with something useful.</strong><p>Your idea brief, cost estimate, or a post for the team-finding group.</p>');html+=`<div class="c-tabs">${[['team','Find a Team'],['cost','Cost calculator']].map(([v,t])=>`<button type="button" class="c-btn cursor-interaction" aria-pressed="${state.businessTab===v}" data-action="business-tab" data-value="${v}">${t}</button>`).join('')}</div>`;
