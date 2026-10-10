@@ -6,10 +6,10 @@ const screen=new Element('hologram-campus-screen');const root=new Element('root'
 
 (async()=>{
 let code=fs.readFileSync(__dirname+'/../public/student.js','utf8');
-code=code.replace('render();\nreturn Campus.controller;', 'globalThis.testApi={state,courses,resources,playlistRows,stages,render};render();return Campus.controller;');
+code=code.replace('render();\nreturn Campus.controller;', 'globalThis.testApi={state,courses,resources,playlistRows,stages,render,careerTools};render();return Campus.controller;');
 const writes=[];let version=0;
 const Campus={status(){},fatal(e){throw e},async api(path,method,data){writes.push({path,method,data});if(path==='/state')return {version:++version};if(path==='/portfolio/share')return{token:data.enabled?'test-token':null};throw Error('Unexpected route '+path);}};
-const context={document:{getElementById:()=>root},window:{addEventListener(){},removeEventListener(){},print(){}},Campus,location:{origin:"https://example.test"},Intl,console,Date,Math,URL,setTimeout,clearTimeout};vm.createContext(context);vm.runInContext(code,context);
+const context={document:{getElementById:()=>root},window:{addEventListener(){},removeEventListener(){},print(){}},Campus,location:{origin:"https://example.test"},Intl,console,Date,Math,URL,setTimeout,clearTimeout};vm.createContext(context);for(const file of ['career-data.js','career-tools.js'])vm.runInContext(fs.readFileSync(__dirname+'/../public/'+file,'utf8'),context);vm.runInContext(code,context);
 const ctl=await context.window.mountStudent({data:{},user:{name:'Test Student',email:'test@example.test'},version:0,requests:[],content:{items:[],settings:{channel:'https://whatsapp.com/channel/test'}}});
 const t=context.testApi;assert.equal(t.state.course,null);
 assert(screen.innerHTML.includes('Welcome,'));assert(screen.innerHTML.includes('Test Student'));
@@ -50,6 +50,32 @@ for(const handler of group.handlers.change)handler({target:{value:'All courses'}
 for(const handler of elements.get('hologram-course-query').handlers.input)handler({target:{value:'MCA'}});
 assert(elements.get('hologram-course-results').innerHTML.includes('1 course found'));
 for(const section of ['home' ,'social','business','money','service','profile','settings','portfolio']){await action('nav',section);assert(screen.innerHTML.length>100);}
+await action('nav','resume');
+assert(screen.innerHTML.includes('Résumé Builder'));
+await action('tool-add','education');
+for(const handler of root.handlers.input)handler({target:{dataset:{resumeField:'education.0.degree'},value:'BCA'}});
+for(const handler of root.handlers.input)handler({target:{dataset:{resumeField:'education.0.institution'},value:'Example College'}});
+for(const handler of root.handlers.input)handler({target:{dataset:{resumeField:'role'},value:'Frontend Developer'}});
+for(const handler of root.handlers.input)handler({target:{dataset:{resumeField:'linkedin'},value:'https://www.linkedin.com/in/example'}});
+assert(t.careerTools.resumeDocument().includes('Example College'));
+assert(!t.careerTools.resumeDocument().includes('<h2>Work experience</h2>'));
+await action('tool-remove','education:0');assert(!t.careerTools.resumeDocument().includes('Example College'));
+await action('tool-undo');assert(t.careerTools.resumeDocument().includes('Example College'));
+for(const handler of root.handlers.input)handler({target:{dataset:{resumeField:'summary'},value:'<script>alert(1)</script>'}});
+assert(!t.careerTools.resumeDocument().includes('<script>'));
+assert(t.careerTools.resumeDocument().includes('&lt;script&gt;'));
+await action('nav','roadmaps');
+assert.equal(t.careerTools.matches('back end').length,1);
+assert.equal(t.careerTools.matches('full-stack').length,1);
+assert.equal(t.careerTools.matches('astronaut').length,0);
+for(const role of context.window.CAMPUS_CAREERS.roles){await action('tool-role',role.id);assert(screen.innerHTML.includes(role.title));assert(screen.innerHTML.includes('https://www.youtube.com/playlist?list='));}
+await action('tool-role','frontend');
+for(const handler of root.handlers.change)handler({target:{dataset:{careerStep:'web'},checked:true}});
+assert(t.careerTools.snapshot().career.progress.frontend.includes('web'));
+await action('tool-use-role','backend');assert.equal(t.state.section,'resume');assert(t.careerTools.resumeDocument().includes('Backend Developer'));
+const printable=t.careerTools.printDocument();assert(printable.includes('@page{size:A4'));assert(!printable.includes('Save now'));assert(!printable.includes('account-bar'));
+await ctl.flush();assert.equal(writes.findLast(w=>w.path==='/state').data.data.resume.education[0].degree,'BCA');
+assert.equal(writes.findLast(w=>w.path==='/state').data.data.career.role,'frontend');
 await action('nav','business');
 const briefForm=elements.get('hologram-find-team-form');
 assert(briefForm,'Idea brief form must use the real dashboard ID');
