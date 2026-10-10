@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node server/local.mjs",
-    "test": "node tests/api.test.mjs && node tests/screens.test.cjs && node tests/admin-screens.test.cjs && node tests/worker.test.mjs",
+    "test": "node tests/api.test.mjs && node tests/screens.test.cjs && node tests/member-welcome.test.cjs && node tests/admin-screens.test.cjs && node tests/worker.test.mjs",
     "deploy": "wrangler d1 migrations apply DB --remote && wrangler deploy"
   },
   "devDependencies": {

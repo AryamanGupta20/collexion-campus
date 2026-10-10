@@ -1,0 +1,14 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const nodes=new Map(),app={innerHTML:''};
+const context={window:{},document:{getElementById(id){if(id==='campus-app')return app;if(!nodes.has(id))nodes.set(id,{});return nodes.get(id)},querySelector(){return true}},console,Date,URL,Blob,setTimeout};
+vm.createContext(context);vm.runInContext(fs.readFileSync(__dirname+'/../public/student.js','utf8'),context);
+let boot=fs.readFileSync(__dirname+'/../public/boot.js','utf8');
+boot=boot.slice(0,boot.indexOf("document.addEventListener('click'"))+'})();';
+(async()=>{await vm.runInContext(boot,context);let loaded=0;context.window.Campus.loadStudent=async()=>{loaded++};
+await context.window.Campus.signedIn({user:{name:'Asha <Student>',email:'test@example.test',created_at:'2026-10-10'},recoveryCode:'test-only-code'});
+assert(app.innerHTML.includes('You’re in, Asha &lt;Student&gt;!'));assert(app.innerHTML.includes('MEMBER PASS'));
+assert(app.innerHTML.includes('test-only-code'));assert(app.innerHTML.includes('PRIVATE · SAVE BEFORE YOU CONTINUE'));
+assert.equal(loaded,0);await nodes.get('recovery-continue').onclick();assert.equal(loaded,1);
+await context.window.Campus.signedIn({user:{name:'Asha'}});assert.equal(loaded,2);
+console.log('PASS: personal signup welcome, escaped names, recovery step and continue/login routing.');
+})();

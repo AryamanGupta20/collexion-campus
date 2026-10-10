@@ -12,6 +12,12 @@ const Campus={status(){},fatal(e){throw e},async api(path,method,data){writes.pu
 const context={document:{getElementById:()=>root},window:{addEventListener(){},removeEventListener(){},print(){}},Campus,location:{origin:"https://example.test"},Intl,console,Date,Math,URL,setTimeout,clearTimeout};vm.createContext(context);vm.runInContext(code,context);
 const ctl=await context.window.mountStudent({data:{},user:{name:'Test Student',email:'test@example.test'},version:0,requests:[],content:{items:[],settings:{channel:'https://whatsapp.com/channel/test'}}});
 const t=context.testApi;assert.equal(t.state.course,null);
+assert(screen.innerHTML.includes('Welcome,'));assert(screen.innerHTML.includes('Test Student'));
+const member=context.window.CampusMemberCard({name:'<img src=x>',created_at:'2026-10-10T00:00:00Z',email:'private@example.test',recoveryCode:'secret'});
+assert(member.includes('&lt;img src=x&gt;'));assert(!member.includes('private@example.test'));assert(!member.includes('secret'));
+assert(member.includes('Not an official college ID'));assert(member.includes('10 Oct 2026'));
+assert(member.includes('Choose your course'));
+
 async function action(a,v=''){for(const f of root.handlers.click)await f({target:{closest:s=>s==='[data-action]'?{dataset:{action:a,value:v}}:null}});}
 assert.equal(t.courses.length,25);
 for(const c of t.courses){await action('course',c.id);await action('nav','courses');assert(screen.innerHTML.includes('Your roadmap'));await action('course-tab','syllabus');assert(screen.innerHTML.includes('playlist'));}
